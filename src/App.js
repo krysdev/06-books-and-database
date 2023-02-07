@@ -2,10 +2,10 @@ import { useState } from 'react';
 import BookCreate from './components/BookCreate';
 import BookList from './components/BookList';
 
-const TEST = [
-  { id: 1, title: 'AaaAaa' },
-  { id: 2, title: 'BbbBbbb' },
-];
+// const TEST = [
+//   { id: 1, title: 'AaaAaa' },
+//   { id: 2, title: 'BbbBbbb' },
+// ];
 
 function App() {
   const [books, setBooks] = useState([]);
