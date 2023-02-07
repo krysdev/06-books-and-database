@@ -8,7 +8,7 @@ const TEST = [
 ];
 
 function App() {
-  const [books, setBooks] = useState(TEST); // []
+  const [books, setBooks] = useState([]);
   
   const createBook = (title) => {    // receives title from BookCreate.js (it is called 'word' there)
     // console.log('Title/word from CREATE:', title)
