@@ -1,25 +1,31 @@
 import { useState } from 'react';
 import BookCreate from './components/BookCreate';
 import BookList from './components/BookList';
-
-// const TEST = [
-//   { id: 1, title: 'AaaAaa' },
-//   { id: 2, title: 'BbbBbbb' },
-// ];
+import axios from 'axios';
 
 function App() {
   const [books, setBooks] = useState([]);
-  
-  const createBook = (title) => {    // receives title from BookCreate.js (it is called 'word' there)
-    // console.log('Title/word from CREATE:', title)
-    const randomID = Math.round(Math.random() * 99999);
-    const updatedBooksArrayState = [...books, { id: randomID, title: title }];
+
+  const fetchBooks = async () => {
+    const response = axios.get('http://localhost:3001/books')
+    
+    setBooks(response.data)
+  };
+
+  // receives title from BookCreate.js (it is called 'word' there)
+  const createBook = async (title) => {
+    const response = await axios.post('http://localhost:3001/books', {
+      title: title,
+    });
+
+    // response > data  is the object returned by the JSON server: { id : given by server, title: SomeTitle }
+    const updatedBooksArrayState = [...books, response.data];
     setBooks(updatedBooksArrayState);
   };
 
   const deleteBookByID = (idToRemove) => {
     // console.log(idToRemove)
-    const updatedBooks = books.filter((booksArrayElement, index) => {      //index not needed here
+    const updatedBooks = books.filter((booksArrayElement, index) => {
       return booksArrayElement.id !== idToRemove;
     });
     setBooks(updatedBooks);
